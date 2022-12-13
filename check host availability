@@ -1,0 +1,13 @@
+#!/bin/bash
+
+HOST="google.com"
+#change the name of the host with the desired one
+ping -c 1 $HOST
+#option -c and times that the ping will be performed
+if [ "$?" -eq "0" ]
+#if the output is equal to 0 (because no output from ping)
+then
+  echo "$HOST reachable."
+else
+  echo "$HOST unreachable."
+fi
