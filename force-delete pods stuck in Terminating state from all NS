@@ -1,0 +1,1 @@
+for ns in $(kubectl get ns --no-headers | cut -d ' ' -f1); do for po in $(kubectl -n $ns get po --no-headers --ignore-not-found | grep Terminating | cut -d ' ' -f1); do kubectl -n $ns delete po $po --force --grace-period 0; done; done;
