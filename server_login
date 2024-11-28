@@ -1,0 +1,31 @@
+####bash_server_choose_options
+
+#!/bin/bash
+
+# Define the list of servers
+declare -a servers=(
+    "server1.com"
+    "server2.com"
+    "server3.com"
+    "server4.com"
+    "server5.com"
+)
+
+# list of servers above
+echo "select a server to connect to:"
+for i in "${!servers[@]}"; do
+    echo "$((i+1)). ${servers[i]}"
+done
+
+# prompt the user for choosing
+read -p "enter the number of the server you want to access: " choice
+
+# validate or deny
+if [[ $choice -ge 1 && $choice -le ${#servers[@]} ]]; then
+    selected_server="${servers[$((choice-1))]}"
+    echo "connecting to $selected_server..."
+    ssh "$selected_server"
+else
+    echo "invalid choice.exiting.start the script once again"
+    exit 1
+fi
